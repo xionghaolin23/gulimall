@@ -3,6 +3,7 @@ package com.xionghl.gulimall.member.controller;
 import java.util.Arrays;
 import java.util.Map;
 
+import com.xionghl.gulimall.member.feign.MemberFeignService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,6 +16,7 @@ import com.xionghl.gulimall.member.service.MemberService;
 import com.xionghl.common.utils.PageUtils;
 import com.xionghl.common.utils.R;
 
+import javax.annotation.Resource;
 
 
 /**
@@ -27,8 +29,22 @@ import com.xionghl.common.utils.R;
 @RestController
 @RequestMapping("member/member")
 public class MemberController {
+
     @Autowired
     private MemberService memberService;
+
+    @Autowired
+    private MemberFeignService memberFeignService;
+
+    /**
+     * 查看个人优惠卷列表 远程调用优惠卷服务
+     */
+    @RequestMapping("/coupons")
+    public R coupons(){
+        R r = memberFeignService.memberList();
+        Object coupons = r.get("coupons");
+        return R.ok().put("page", coupons);
+    }
 
     /**
      * 列表
