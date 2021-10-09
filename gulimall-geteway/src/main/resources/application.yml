@@ -1,0 +1,19 @@
+spring:
+  profiles:
+    active: dev # 表示开发环境
+    #active: test # 表示测试环境
+    #active: prop 表示生产环境
+
+  #网关规则 前端访问localhost:88?keyWord=qq的时候跳转到 https://www.baidu.com/，访问qq的时候跳转到 https://im.qq.com/index
+  cloud:
+    gateway:
+      routes:
+        - id: baidu_route
+          uri: https://www.baidu.com/
+          predicates:
+            - Query=keyWord, baidu
+
+        - id: qq_route
+          uri: https://im.qq.com/index
+          predicates:
+              - Query=keyWord, qq
