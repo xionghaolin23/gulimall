@@ -1,23 +1,5 @@
-server:
-  port: 7000
-
 spring:
-  application:
-    name: gulimall-coupon
-  datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://112.74.182.243:3306/gulimall_oms?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai
-    username: root
-    password: qq123
-  cloud:
-    nacos:
-      discovery:
-        server-addr: localhost:8848
-
-mybatis-plus:
-  mapper-locations: classpath:/mapper/**/*.xml
-  global-config:
-    db-config:
-      id-type: auto #主键自增
-
-
+  profiles:
+    active: dev # 表示开发环境
+    #active: test # 表示测试环境
+    #active: prop 表示生产环境
