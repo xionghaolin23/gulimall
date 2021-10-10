@@ -1,7 +1,6 @@
 package com.xionghl.gulimall.product.controller;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 
 import com.xionghl.gulimall.product.entity.CategoryEntity;
@@ -17,6 +16,7 @@ import com.xionghl.common.utils.PageUtils;
 import com.xionghl.common.utils.R;
 
 
+
 /**
  * 商品三级分类
  *
@@ -30,21 +30,11 @@ public class CategoryController {
     @Autowired
     private CategoryService categoryService;
 
-
-    /**
-     * 显示分类树形列表详情
-     */
-    @RequestMapping("/list/tree")
-    public R categoryList() {
-        List<CategoryEntity> categoryList = categoryService.categoryList();
-        return R.ok().put("data", categoryList);
-    }
-
     /**
      * 列表
      */
     @RequestMapping("/list")
-    public R list(@RequestParam Map<String, Object> params) {
+    public R list(@RequestParam Map<String, Object> params){
         PageUtils page = categoryService.queryPage(params);
 
         return R.ok().put("page", page);
@@ -55,8 +45,8 @@ public class CategoryController {
      * 信息
      */
     @RequestMapping("/info/{catId}")
-    public R info(@PathVariable("catId") Long catId) {
-        CategoryEntity category = categoryService.getById(catId);
+    public R info(@PathVariable("catId") Long catId){
+		CategoryEntity category = categoryService.getById(catId);
 
         return R.ok().put("category", category);
     }
@@ -65,8 +55,8 @@ public class CategoryController {
      * 保存
      */
     @RequestMapping("/save")
-    public R save(@RequestBody CategoryEntity category) {
-        categoryService.save(category);
+    public R save(@RequestBody CategoryEntity category){
+		categoryService.save(category);
 
         return R.ok();
     }
@@ -75,18 +65,18 @@ public class CategoryController {
      * 修改
      */
     @RequestMapping("/update")
-    public R update(@RequestBody CategoryEntity category) {
-        categoryService.updateById(category);
+    public R update(@RequestBody CategoryEntity category){
+		categoryService.updateById(category);
 
         return R.ok();
     }
 
     /**
-     * 菜单品牌删除（逻辑删除）
+     * 删除
      */
     @RequestMapping("/delete")
-    public R delete(@RequestBody Long[] catIds) {
-        categoryService.removeByIds(Arrays.asList(catIds));
+    public R delete(@RequestBody Long[] catIds){
+		categoryService.removeByIds(Arrays.asList(catIds));
 
         return R.ok();
     }
