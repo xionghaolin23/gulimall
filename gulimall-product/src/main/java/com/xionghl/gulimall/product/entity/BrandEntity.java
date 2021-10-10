@@ -39,6 +39,7 @@ public class BrandEntity implements Serializable {
 	/**
 	 * 显示状态[0-不显示；1-显示]
 	 */
+
 	private Integer showStatus;
 	/**
 	 * 检索首字母

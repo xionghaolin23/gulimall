@@ -17,3 +17,22 @@ spring:
           uri: https://im.qq.com/index
           predicates:
               - Query=keyWord, qq
+
+        - id: product_route
+          uri: lb://gulimall-product
+          predicates:
+            #前端项目带api的都来到网关
+            - Path=/api/product/**
+          filters:
+            - RewritePath=/api/?(?<segment>.*), /$\{segment}
+
+        - id: renren_route
+          uri: lb://renren-fast
+          predicates:
+            #前端项目带api的都来到网关
+              - Path=/api/**
+          filters:
+             #路径重写 localhost:88/api/captcha.jpg 重写成 localhost:8080/renren-fast/captcha.jpg
+            - RewritePath=/api/?(?<segment>.*), /renren-fast/$\{segment}
+            #商品服务路由
+
