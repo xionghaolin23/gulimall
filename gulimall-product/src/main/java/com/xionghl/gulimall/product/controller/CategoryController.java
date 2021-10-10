@@ -1,6 +1,7 @@
 package com.xionghl.gulimall.product.controller;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 import com.xionghl.gulimall.product.entity.CategoryEntity;
@@ -27,8 +28,18 @@ import com.xionghl.common.utils.R;
 @RestController
 @RequestMapping("product/category")
 public class CategoryController {
+
     @Autowired
     private CategoryService categoryService;
+
+    /**
+     * 显示分类树形列表详情
+     */
+    @RequestMapping("/list/tree")
+    public R categoryList() {
+        List<CategoryEntity> categoryList = categoryService.categoryList();
+        return R.ok().put("data", categoryList);
+    }
 
     /**
      * 列表
@@ -72,7 +83,7 @@ public class CategoryController {
     }
 
     /**
-     * 删除
+     * 菜单品牌删除（逻辑删除）
      */
     @RequestMapping("/delete")
     public R delete(@RequestBody Long[] catIds){
